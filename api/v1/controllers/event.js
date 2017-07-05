@@ -164,12 +164,14 @@ module.exports = {
 
         var _body = req.body;
 
+        _body['created_at'] = new Date();
+
         // validations
         if (!_body.clientname) {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
 
-        connect.db.one('INSERT INTO events (title ) VALUES($1) RETURNING *', [_body.title])
+        connect.db.one('INSERT INTO event (title, body, owner, created_at ) VALUES($1, $2, $3, $4) RETURNING *', [_body.title, _body.body, _body.owner, _body.created_at])
         .then(function(data) {
             return res.status(200)
                 .json({
