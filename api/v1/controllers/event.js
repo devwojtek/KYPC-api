@@ -5,7 +5,7 @@ var helper = rootRequire('./api/v1/helper');
 module.exports = {
 	listAllEvents: function listAllEvents(req, res, next){
   //       console.log("get data")
-		connect.db.any("SELECT * FROM events")
+		connect.db.any("SELECT * FROM event")
     .then(function(data) {
         return res.status(200)
             .json({
@@ -28,7 +28,7 @@ module.exports = {
 	getById: function getById(req, res, next){
 		_params = req.params;
         var id = _params.id ? _params.id : null;
-        connect.db.any('SELECT * FROM events WHERE _id = $1', id)
+        connect.db.any('SELECT * FROM event WHERE _id = $1', id)
             .then(function(event) {
                 if (event.length > 0) {
                     event = event[0];
@@ -71,7 +71,7 @@ module.exports = {
         if (!_params.id) {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
-        connect.db.any('SELECT * FROM events WHERE id = $1', _params.id)
+        connect.db.any('SELECT * FROM event WHERE id = $1', _params.id)
             .then(function(event) {
                 if (event.length > 0) {
                     event = event[0];
@@ -81,7 +81,7 @@ module.exports = {
                 if (event && event != null) {
                     _body.title = _body.title ? _body.title : event.title;
 
-                    connect.db.one('update user_event set title=$1 where id = $2 RETURNING * ', [_body.title, _params.id])
+                    connect.db.one('update event set title=$1 where id = $2 RETURNING * ', [_body.title, _params.id])
                         .then(function(data) {
                             res.status(200)
                                 .json({
@@ -130,7 +130,7 @@ module.exports = {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
         // delete;
-        connect.db.result('DELETE FROM events WHERE id = $1', _params.id)
+        connect.db.result('DELETE FROM event WHERE id = $1', _params.id)
             .then(function(result) {
                 // rowCount = number of rows affected by the query
                 if (result.rowCount > 0) {
