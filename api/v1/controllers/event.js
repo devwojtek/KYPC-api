@@ -3,9 +3,9 @@ var connect = rootRequire('./db/queries'); // local postgres connection
 var helper = rootRequire('./api/v1/helper');
 
 module.exports = {
-	listAllEvents: function listAllEvents(req, res, next){
-  //       console.log("get data")
-	connect.db.any("SELECT * FROM event ORDER BY created_at DESC")
+    listAllEvents: function listAllEvents(req, res, next){
+    console.log("get data")
+    connect.db.any("SELECT * FROM event ORDER BY created_at DESC")
     .then(function(data) {
         return res.status(200)
             .json({
@@ -23,11 +23,12 @@ module.exports = {
                 message: 'Something went wrong !'
             });
     });
-	},
+    },
 
-	getById: function getById(req, res, next){
-		_params = req.params;
-        var id = _params.id ? _params.id : null;
+    getById: function getById(req, res, next){
+        var _params = req.params
+            ,id = _params.id ? _params.id : null;
+
         connect.db.any('SELECT * FROM event WHERE _id = $1', id)
             .then(function(event) {
                 if (event.length > 0) {
@@ -62,11 +63,11 @@ module.exports = {
                     });
             });
         res.send("hi")
-	},
+    },
 
-	updateById: function updateById(req, res, next){
-		var _body = req.body;
-        var _params = req.params;
+    updateById: function updateById(req, res, next){
+        var _body = req.body
+            ,_params = req.params;
         // validations
         if (!_params.id) {
             return res.send({ status: 0, message: 'Invalid parameters' });
@@ -116,10 +117,10 @@ module.exports = {
                         message: 'Something went wrong !'
                     });
             });
-	},
+    },
 
 
-	/**
+    /**
      * Delete API
      */
     deleteById: function deleteById(req, res, next) {
