@@ -5,7 +5,7 @@ var helper = rootRequire('./api/v1/helper');
 module.exports = {
     listAllEvents: function listAllEvents(req, res, next){
     console.log("get data")
-    connect.db.any("SELECT * FROM alerts ORDER BY created_at DESC")
+    connect.db.any("SELECT * FROM alerts ORDER BY created_at ASC")
     .then(function(data) {
         return res.status(200)
             .json({
