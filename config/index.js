@@ -16,5 +16,6 @@ module.exports = {
         'password': 'zc0n9266#1'
     },
     'osticketapikey': 'E5FAAC5FB7DE8EF75920ED284AD8078D',
-    'osticketserver': 'http://52.54.77.6:8080'
+    'osticketserver': 'http://52.54.77.6:8080',
+    'ip':'52.54.77.6'
 };

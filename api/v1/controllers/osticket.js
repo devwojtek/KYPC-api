@@ -6,6 +6,7 @@ module.exports = {
 	create: function create(req, res, next) {
 		var _body = req.body;
 
+		_body['ip'] = config.ip;
 		var args = {
 		    data: _body,
 		    headers: { "Content-Type": "application/json",
