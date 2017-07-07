@@ -7,6 +7,7 @@ var entityController = require('./controllers/entity');
 var clientController = require('./controllers/client');
 var eventController = require('./controllers/event');
 var subController = require('./controllers/subscription');
+var osticketController = require('./controllers/osticket')
 // var signalController = require('./controllers/signal');
 // var signalLogController = require('./controllers/signallog');
 
@@ -56,6 +57,8 @@ router.get('/subscriptions/:id', subController.getById);
 router.post('/subscriptions', subController.create);
 router.put('/subscriptions/:id', subController.updateById);
 router.delete('/subscriptions/:id', subController.deleteById);
+
+router.post('/osticket/create', osticketController.create)
 
 // router.post('/signals', signalController.processSignal);
 
