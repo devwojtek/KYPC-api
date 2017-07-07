@@ -34,8 +34,12 @@ module.exports = {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
 
+        console.log("connect ++++++++++++ ", connect)
+
         connect.db.any('SELECT * FROM users WHERE username = $1', _body.username)
             .then(function(user) {
+
+                console.log("______logged in__________")
 
                 if (user.length > 0) {
                     user = user[0];
@@ -46,6 +50,7 @@ module.exports = {
                 if (user && user != null) {
                     if (user.password == _body.password && user.active == true) {
                         // if sign in success
+                        console.log('success ', jwt)
                         jwt.sign({username: user.username, password: user.password}, config.secret, function(err, token) {
                             return res.status(200)
                                 .json({
@@ -56,6 +61,7 @@ module.exports = {
                             // return res.send({ status: 1, message: 'success', data: { token: token } });
                         });
                     } else {
+                        console.log('fail')
                         return res.status(401)
                             .json({
                                 status: 'fail',
@@ -64,6 +70,7 @@ module.exports = {
                             });
                     }
                 } else {
+                    console.log('_____fail _________')
                     return res.status(401)
                         .json({
                             status: 'fail',
@@ -73,6 +80,7 @@ module.exports = {
                 }
             })
             .catch(function(err) {
+                    console.log("_____error_____", err)
                     return res.status(500)
                     .json({
                         status: 'fail',
