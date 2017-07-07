@@ -24,6 +24,8 @@ module.exports = {
      */
     login: function login(req, res, next) {
 
+        console.log("login")
+
         var _body = req.body;
         // _body = JSON.parse(Object.keys(_body)[0]);
 
