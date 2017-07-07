@@ -9,10 +9,10 @@ module.exports = {
     //     'password': '123456'
     // }
     'postgre_connection': {
-        'host': '54.234.222.57',
+        'host': '52.54.77.6',
         'port': 5432,
         'database': 'dds_project_v1',
-        'user': 'tom',
-        'password': 'ksdmn230sdfk32'
+        'user': 'postgres',
+        'password': 'zc0n9266#1'
     }
 };
