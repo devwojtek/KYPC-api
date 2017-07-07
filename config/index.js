@@ -9,7 +9,7 @@ module.exports = {
     //     'password': '123456'
     // }
     'postgre_connection': {
-        'host': '52.54.77.6',
+        'host': '127.0.0.1',
         'port': 5432,
         'database': 'dds_project_v1',
         'user': 'postgres',
