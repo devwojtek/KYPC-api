@@ -21,7 +21,7 @@ module.exports = {
 		    return res.status(200)
 	            .json({
 	                status: 'success',
-	                data: data,
+	                data: data.toString('ascii'),
 	                message: 'Created new ticket successfully'
 	            });
 		});
