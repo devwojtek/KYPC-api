@@ -99,7 +99,7 @@ module.exports = {
 
         var receiver = _body.email;
         var subject = "Verify Registration !";
-        var text = "http://localhost:8080/v1/api/verify?email=" + _body.email + "&token=" + token;
+        var text = "http://localhost:8000/v1/api/verify?email=" + _body.email + "&token=" + token;
 
         // connect.db.one('INSERT INTO users (email,password,username,active,token) VALUES($1, $2, $3, $4, $5) RETURNING *', [_body.email, _body.password, _body.email, false, token])
         // .then(function(data) {
