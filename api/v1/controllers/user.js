@@ -48,7 +48,7 @@ module.exports = {
            from: 'chrisbrownapple001@gmail.com',
            to: 'jlee021199@gmail.com',
            subject: 'hello',
-           html: '<b>hello world!</b>'
+           html: '<b>hello world!</b>',
            text: 'hello world!'
         });
 
