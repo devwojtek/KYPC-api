@@ -1,6 +1,14 @@
 var TokenGenerator = require('uuid/v1');
 // var nodemailer = require('nodemailer');
 var email = require("emailjs/email");
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
+var transporter = nodemailer.createTransport(smtpTransport({
+   host: '127.0.0.1',
+   port: 25
+}));
+
 var server = email.server.connect({
     user: " ziara.testuser",
     password: "testM@!l",
@@ -14,19 +22,14 @@ module.exports = {
         return token;
     },
     sendMailTo: function(receiver, subject, text, next) {
-        server.send({
-            text: text,
-            from: 'RK Team<admin@localhost.com>',
-            to: receiver,
-            cc: receiver,
-            subject: subject
-        }, function(err, message) { 
-            if (err) {
-                next(err);
-            } else {
-                next();        
-                
-            }
+        transporter.sendMail({
+           from: 'support@zairasoft.com',
+           to: receiver,
+           subject: support,
+           html: text,
+           text: text
         });
+
+        next()
     }
 };

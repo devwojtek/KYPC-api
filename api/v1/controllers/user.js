@@ -7,13 +7,6 @@ var helper = rootRequire('./api/v1/helper');
 var path = require('path');
 var async = require('async');
 var crypto = require('crypto');
-var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
-
-var transporter = nodemailer.createTransport(smtpTransport({
-   host: '127.0.0.1',
-   port: 25
-}));
 
 module.exports = {
 
@@ -43,16 +36,6 @@ module.exports = {
         }
 
         console.log("connect ++++++++++++ ", connect);
-
-        console.log("+++++++++++++++++++++++++++transporter+++++++++++++++++++++++++", transporter)
-
-        transporter.sendMail({
-           from: 'chrisbrownapple001@gmail.com',
-           to: 'jlee021199@gmail.com',
-           subject: 'hello',
-           html: '<b>hello world!</b>',
-           text: 'hello world!'
-        });
 
         connect.db.any('SELECT * FROM users WHERE username = $1', _body.username)
             .then(function(user) {
