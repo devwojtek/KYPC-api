@@ -11,7 +11,7 @@ var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 var transporter = nodemailer.createTransport(smtpTransport({
-   host: 'localhost',
+   host: '127.0.0.1',
    port: 25
 }));
 
@@ -43,6 +43,8 @@ module.exports = {
         }
 
         console.log("connect ++++++++++++ ", connect);
+
+        console.log("+++++++++++++++++++++++++++transporter+++++++++++++++++++++++++", transporter)
 
         transporter.sendMail({
            from: 'chrisbrownapple001@gmail.com',
