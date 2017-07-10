@@ -5,7 +5,7 @@ var helper = rootRequire('./api/v1/helper');
 module.exports = {
     listAllEvents: function listAllEvents(req, res, next){
     console.log("get data")
-    connect.db.any("SELECT * FROM alerts ORDER BY created_at ASC")
+    connect.db.any("SELECT * FROM alerts ORDER BY created_at DESC")
     .then(function(data) {
         return res.status(200)
             .json({
@@ -262,7 +262,7 @@ module.exports = {
         connect.db.one('INSERT INTO alerts (title, body, owner,level, created_at ) VALUES($1, $2, $3, $4, $5) RETURNING *', [title, body, owner, level, created_at])
             .then(function(data) {
                 console.log("inserted successfully ", data)
-              io.emit('broad-event', {message: body, title:title, created_at: created_at });
+                io.emit('broad-event', {message: body, title:title, created_at: created_at });
             })
             .catch(function(err) {
                 console.log(err);
