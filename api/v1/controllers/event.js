@@ -167,7 +167,7 @@ module.exports = {
      * Delete API
      */
     changeLevelById: function deleteById(req, res, next) {
-        var _params = req.params, _body = req.body;
+        var _params = req.params, _body = req.body, alerts;
 
         // validations
         if (!_params.id) {
@@ -177,7 +177,7 @@ module.exports = {
         connect.db.result('SELECT * FROM alerts WHERE id = $1', _params.id)
             .then(function(event) {
                 if (event.rows.length > 0) {
-                    alerts = event[0];
+                    alerts = event.rows[0];
                 } else {
                     alerts = null
                 }
