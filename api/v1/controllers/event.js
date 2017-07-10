@@ -194,6 +194,7 @@ module.exports = {
                                 });
                         })
                         .catch(function(err) {
+                            console.log('ERROR:', error);
                             return res.status(500)
                                 .json({
                                     status: 'fail',
@@ -211,7 +212,7 @@ module.exports = {
                 }
             })
             .catch(function(err) {
-                // console.log('ERROR:', error);
+                console.log('ERROR:', error);
                 return res.status(500)
                     .json({
                         status: 'fail',
