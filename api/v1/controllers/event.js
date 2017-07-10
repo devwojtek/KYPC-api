@@ -230,7 +230,7 @@ module.exports = {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
 
-        connect.db.one('INSERT INTO alerts (title, body, owner, level, created_at ) VALUES($1, $2, $3, $4) RETURNING *', [_body.title, _body.body, _body.owner, _body.level, _body.created_at])
+        connect.db.one('INSERT INTO alerts (title, body, owner, level, created_at ) VALUES($1, $2, $3, $4, $5) RETURNING *', [_body.title, _body.body, _body.owner, _body.level, _body.created_at])
         .then(function(data) {
             return res.status(200)
                 .json({
@@ -253,12 +253,13 @@ module.exports = {
     create_event: function create_event(message, io){
       var body = message.message,
         owner = message.owner,
+        level = "low",
         created_at = new Date(),
         title = message.title;
 
         console.log("message = ", message)
 
-        connect.db.one('INSERT INTO alerts (title, body, owner, created_at ) VALUES($1, $2, $3, $4) RETURNING *', [title, body, owner, created_at])
+        connect.db.one('INSERT INTO alerts (title, body, owner,level, created_at ) VALUES($1, $2, $3, $4, $5) RETURNING *', [title, body, owner, level, created_at])
             .then(function(data) {
                 console.log("inserted successfully ", data)
               io.emit('broad-event', {message: body, title:title, created_at: created_at });
