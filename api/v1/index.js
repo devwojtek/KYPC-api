@@ -50,6 +50,7 @@ router.get('/listAllEntities', entityController.listAllEntities);
 router.get('/events', eventController.listAllEvents);
 router.get('/events/:id', eventController.getById);
 router.post('/events', eventController.create);
+router.post('/events/changeLevelById/:id', eventController.changeLevelById);
 router.put('/events/:id', eventController.updateById);
 router.delete('/events/:id', eventController.deleteById);
 
