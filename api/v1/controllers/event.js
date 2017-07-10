@@ -175,7 +175,7 @@ module.exports = {
         }
         console.log(_params.id)
         connect.db.result('SELECT * FROM alerts WHERE id = $1', _params.id)
-            .then(function(result) {
+            .then(function(event) {
                 if (event.length > 0) {
                     alerts = event[0];
                 } else {
