@@ -161,6 +161,64 @@ module.exports = {
                     });
             });
     },
+    
+    /**
+     * Delete API
+     */
+    changeLevelById: function deleteById(req, res, next) {
+        var _params = req.params, _body = req.body;
+
+        // validations
+        if (!_params.id) {
+            return res.send({ status: 0, message: 'Invalid parameters' });
+        }
+        // delete;
+        connect.db.result('SELECT * FROM alerts WHERE id = $1', _params.id)
+            .then(function(result) {
+                if (event.length > 0) {
+                    alerts = event[0];
+                } else {
+                    alerts = null
+                }
+                if (event && alerts != null) {
+                    _body.level = _body.level ? _body.level : event.level;
+
+                    connect.db.one('update alerts set level=$1 where id = $2 RETURNING * ', [_body.level, _params.id])
+                        .then(function(data) {
+                            res.status(200)
+                                .json({
+                                    status: 'success',
+                                    data: data,
+                                    message: 'Updated level of alerts successfully.'
+                                });
+                        })
+                        .catch(function(err) {
+                            return res.status(500)
+                                .json({
+                                    status: 'fail',
+                                    err: err,
+                                    message: 'Something went wrong !'
+                                });
+                        });
+                } else {
+                    return res.status(401)
+                        .json({
+                            status: 'fail',
+                            err: "Unauthorized access.",
+                            message: 'Incorrect event.'
+                        });
+                }
+            })
+            .catch(function(err) {
+                // console.log('ERROR:', error);
+                return res.status(500)
+                    .json({
+                        status: 'fail',
+                        err: err,
+                        message: 'Something went wrong !'
+                    });
+            });
+    },
     create: function create(req, res, next) {
 
         var _body = req.body;
@@ -172,7 +230,7 @@ module.exports = {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
 
-        connect.db.one('INSERT INTO alerts (title, body, owner, created_at ) VALUES($1, $2, $3, $4) RETURNING *', [_body.title, _body.body, _body.owner, _body.created_at])
+        connect.db.one('INSERT INTO alerts (title, body, owner, level, created_at ) VALUES($1, $2, $3, $4) RETURNING *', [_body.title, _body.body, _body.owner, _body.level, _body.created_at])
         .then(function(data) {
             return res.status(200)
                 .json({
