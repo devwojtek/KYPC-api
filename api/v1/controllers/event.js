@@ -157,7 +157,7 @@ module.exports = {
                     .json({
                         status: 'fail',
                         err: err,
-                        message: 'Something went wrong !'
+                        : 'Something went wrong !'
                     });
             });
     },
@@ -172,7 +172,8 @@ module.exports = {
         if (!_params.id) {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
-        // delete;
+
+        console.log("params", _params.id)
         connect.db.result('SELECT * FROM alerts WHERE id = $1', _params.id)
             .then(function(result) {
                 if (event.length > 0) {
