@@ -181,6 +181,8 @@ module.exports = {
                 } else {
                     alerts = null
                 }
+                console.log('event', event)
+                console.log('alerts',alerts)
                 if (event && alerts != null) {
                     _body.level = _body.level ? _body.level : event.level;
 
