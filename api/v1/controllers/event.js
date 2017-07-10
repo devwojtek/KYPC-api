@@ -161,7 +161,7 @@ module.exports = {
                     });
             });
     },
-    
+
     /**
      * Delete API
      */
@@ -226,7 +226,7 @@ module.exports = {
         _body['created_at'] = new Date();
 
         // validations
-        if (!_body.clientname) {
+        if (!_body.title) {
             return res.send({ status: 0, message: 'Invalid parameters' });
         }
 
