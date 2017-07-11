@@ -262,16 +262,16 @@ module.exports = {
         title = message.title;
 
         console.log("message = ", message)
-        io.emit('broad-event', {message: body, title:title, created_at: created_at });
         
-        // connect.db.one('INSERT INTO alerts (title, body, owner,level, created_at ) VALUES($1, $2, $3, $4, $5) RETURNING *', [title, body, owner, level, created_at])
-        //     .then(function(data) {
-        //         console.log("inserted successfully ", data)
-        //         io.emit('broad-event', {message: body, title:title, created_at: created_at });
-        //     })
-        //     .catch(function(err) {
-        //         console.log(err);
-        //     });
+        
+        connect.db.one('INSERT INTO alerts (title, body, owner,level, created_at ) VALUES($1, $2, $3, $4, $5) RETURNING *', [title, body, owner, level, created_at])
+        .then(function(data) {
+            console.log("inserted successfully ", data)
+            io.emit('broad-event', {message: body, title:title, created_at: created_at });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
     },
 
 }
