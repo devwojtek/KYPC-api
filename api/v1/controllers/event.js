@@ -268,6 +268,7 @@ module.exports = {
         .then(function(data) {
             console.log("inserted successfully ", data)
             io.emit('broad-event', {message: body, title:title, created_at: created_at });
+            helper.sendMailTo('alerts@ziarasoft.com', title, '<div>' + body + '</div>');
         })
         .catch(function(err) {
             console.log(err);
